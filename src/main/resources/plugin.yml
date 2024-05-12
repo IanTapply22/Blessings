@@ -1,0 +1,4 @@
+name: Blessings
+version: '${project.version}'
+main: com.iantapply.blessings.Blessings
+api-version: '1.20'

@@ -3,7 +3,11 @@ package com.iantapply.blessings.utils;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class BlessingHead {
+/**
+ * Used to interact with the armor stand of the blessing and to
+ * teleport it to locations.
+ */
+public class BlessingArmorStand {
     /**
      * Teleport the armor stand up
      * @param armorStand The armor stand to teleport

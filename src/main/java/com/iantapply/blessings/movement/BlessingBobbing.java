@@ -1,8 +1,12 @@
-package com.iantapply.blessings.runnables;
+package com.iantapply.blessings.movement;
 
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/**
+ * Handles all the vertical movement of the blessing armor stand.
+ * This runnable is just a simple sin wave that moves the armor stand up and down.
+ */
 public class BlessingBobbing extends BukkitRunnable {
 
     private long currentTick = 0;

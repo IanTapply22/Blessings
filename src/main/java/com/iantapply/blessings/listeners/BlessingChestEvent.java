@@ -1,8 +1,7 @@
 package com.iantapply.blessings.listeners;
 
-import com.iantapply.blessings.BlessingAnimation;
+import com.iantapply.blessings.blessing.Blessing;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
@@ -10,50 +9,38 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 
+/**
+ * The event listener for the blessing chest interaction. All usual player interactions are caught
+ * well in advance.
+ */
 public class BlessingChestEvent implements Listener {
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) throws NoSuchFieldException, IllegalAccessException {
+        // General initialization of the event
         Player player = event.getPlayer();
         Block clickedBlock = event.getClickedBlock();
 
-        // If it isn't a valid block, skip the rest of the code
-        if (clickedBlock == null) {
-            return;
-        }
+        if (clickedBlock == null) return;
+        if (clickedBlock.getType() != Material.CHEST) return;
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
-        // If the block isn't a chest, skip the rest of the code
-        if (clickedBlock.getType() != Material.CHEST) {
-            return;
-        }
-
-        // If the player didn't right click the block, skip the rest of the code
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
-            return;
-        }
-
-        /**
-         * We can know that the block is a chest, so we can cast it to a Chest object
-         */
-
+        // Cast the clicked block to a chest
         Chest chestState = (Chest) clickedBlock.getState();
-        String chestName = chestState.getCustomName();
+        Inventory chestInventory = chestState.getInventory();
+        String chestName = chestInventory.getName();
 
-        // If the chest doesn't have a custom name, skip the rest of the code
-        if (chestName == null) {
-            return;
-        }
+        if (chestName == null) return;
 
-        // If the chest name isn't "Blessing", skip the rest of the code
-        if (!chestName.equals("Blessing")) {
-            return;
-        }
+        String BLESSING_CHEST_NAME = "Blessing";
+        if (!chestName.equals(BLESSING_CHEST_NAME)) return;
 
         event.setCancelled(true);
 
-        BlessingAnimation.playOpenChestAnimation(chestState, true);
-        BlessingAnimation.createBlessingAnimation(player, clickedBlock);
-        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 10f, 1);
+        // Finally crease the blessing and start it
+        Blessing blessing = new Blessing(clickedBlock, player);
+        blessing.start();
     }
 }

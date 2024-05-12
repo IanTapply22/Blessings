@@ -1,10 +1,12 @@
-package com.iantapply.blessings.runnables;
+package com.iantapply.blessings.movement;
 
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
- * A runnable that rotates a blessing armor stands head
+ * A runnable that rotates a blessing armor stands head.
+ * This runnable is just a simple rotation that moves the armor stand's
+ * head by adding a value to the Y.
  */
 public class BlessingRotation extends BukkitRunnable {
 

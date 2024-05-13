@@ -20,7 +20,7 @@ public class BlessingSkull {
      * @param url The url of the skull texture
      * @return The skull item
      */
-    public static ItemStack getSkull(String url) throws NoSuchFieldException, IllegalAccessException {
+    public static ItemStack getSkull(String url) {
         ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
         if(url.isEmpty()) {
             return head;
@@ -32,9 +32,13 @@ public class BlessingSkull {
         profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
 
         Field profileField;
-        profileField = headMeta.getClass().getDeclaredField("profile");
-        profileField.setAccessible(true);
-        profileField.set(headMeta, profile);
+        try {
+            profileField = headMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(headMeta, profile);
+        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e1) {
+            e1.printStackTrace();
+        }
 
         head.setItemMeta(headMeta);
         return head;

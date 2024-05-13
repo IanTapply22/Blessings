@@ -98,10 +98,8 @@ public class Blessing {
 
     /**
      * Starts the blessing and all of its subcomponents
-     * @throws NoSuchFieldException
-     * @throws IllegalAccessException
      */
-    public void start() throws NoSuchFieldException, IllegalAccessException {
+    public void start() {
         BlessingChest.executeChestAnimation(this.player, this.chestBlock, true);
         createBlessingArmorStand();
         triggerBlessingSound();
@@ -119,10 +117,8 @@ public class Blessing {
 
     /**
      * Creates the armor stand and its configurations for the blessing
-     * @throws NoSuchFieldException
-     * @throws IllegalAccessException
      */
-    public void createBlessingArmorStand() throws NoSuchFieldException, IllegalAccessException {
+    public void createBlessingArmorStand() {
         this.armorStand = player.getWorld().spawn(chestBlock.getLocation().add(0.5, -1,0.5), ArmorStand.class);
         this.armorStand.setGravity(false);
         this.armorStand.getEquipment().setHelmet(new ItemStack(BlessingSkull.getSkull(this.headURL)));

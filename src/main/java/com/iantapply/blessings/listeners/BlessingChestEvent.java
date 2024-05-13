@@ -18,7 +18,7 @@ import org.bukkit.inventory.Inventory;
 public class BlessingChestEvent implements Listener {
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) throws NoSuchFieldException, IllegalAccessException {
+    public void onPlayerInteract(PlayerInteractEvent event) {
         // General initialization of the event
         Player player = event.getPlayer();
         Block clickedBlock = event.getClickedBlock();

@@ -21,7 +21,7 @@ public class BlessingSkull {
      * @return The skull item
      */
     public static ItemStack getSkull(String url) throws NoSuchFieldException, IllegalAccessException {
-        ItemStack head = new ItemStack(Material.SKULL, 1, (short)3);
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
         if(url.isEmpty()) {
             return head;
         }

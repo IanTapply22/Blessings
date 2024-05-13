@@ -8,7 +8,6 @@ import com.iantapply.blessings.utils.BlessingChest;
 import com.iantapply.blessings.utils.BlessingArmorStand;
 import com.iantapply.blessings.utils.BlessingSkull;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -16,17 +15,17 @@ import org.bukkit.inventory.ItemStack;
 
 public class Blessing {
     String headURL = "https://textures.minecraft.net/texture/e93e2068617872c542ecda1d27df4ece91c699907bf327c4ddb85309412d3939";
-    Block chestBlock;
+    Chest chestBlock;
     Player player;
     ArmorStand armorStand;
-    Integer duration = 20;
+    Integer duration = 30;
 
     /**
      * Creates a new blessing instance
      * @param chestBlock The chest block of the blessing
      * @param player The player that the blessing is for
      */
-    public Blessing(Block chestBlock, Player player) {
+    public Blessing(Chest chestBlock, Player player) {
         this.chestBlock = chestBlock;
         this.player = player;
     }
@@ -37,7 +36,7 @@ public class Blessing {
      * @param chestBlock The chest block of the blessing
      * @param player The player that the blessing is for
      */
-    public Blessing(String headURL, Block chestBlock, Player player) {
+    public Blessing(String headURL, Chest chestBlock, Player player) {
         this.headURL = headURL;
         this.chestBlock = chestBlock;
         this.player = player;
@@ -50,7 +49,7 @@ public class Blessing {
      * @param player The player that the blessing is for
      * @param duration The duration that the blessing is active for
      */
-    public Blessing(String headURL, Block chestBlock, Player player, Integer duration) {
+    public Blessing(String headURL, Chest chestBlock, Player player, Integer duration) {
         this.headURL = headURL;
         this.chestBlock = chestBlock;
         this.player = player;
@@ -69,7 +68,7 @@ public class Blessing {
      * Gets the chest block of the blessing
      * @return The chest as a block object
      */
-    public Block getChestBlock() {
+    public Chest getChestBlock() {
         return chestBlock;
     }
 
@@ -103,7 +102,7 @@ public class Blessing {
      * @throws IllegalAccessException
      */
     public void start() throws NoSuchFieldException, IllegalAccessException {
-        BlessingChest.executeChestAnimation(this.player, (Chest) this.chestBlock, true);
+        BlessingChest.executeChestAnimation(this.player, this.chestBlock, true);
         createBlessingArmorStand();
         triggerBlessingSound();
         elevate();
@@ -134,8 +133,8 @@ public class Blessing {
      * Attaches the movement components of the blessing
      */
     public void attachBlessingMovement() {
-        new BlessingRotation(armorStand).runTaskTimer(Blessings.getPlugin(), 0, 1);
-        new BlessingBobbing(armorStand, 0.1, 0.1).runTaskTimer(Blessings.getPlugin(), 0, 1);
+        new BlessingRotation(armorStand).runTaskTimer(Blessings.getPlugin(), 0, 0);
+        new BlessingBobbing(armorStand, 0.3, 7.0).runTaskTimer(Blessings.getPlugin(), 20, 1);
     }
 
     /**

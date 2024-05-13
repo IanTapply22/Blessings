@@ -40,7 +40,7 @@ public class BlessingChestEvent implements Listener {
         event.setCancelled(true);
 
         // Finally crease the blessing and start it
-        Blessing blessing = new Blessing(clickedBlock, player);
+        Blessing blessing = new Blessing(chestState, player);
         blessing.start();
     }
 }
